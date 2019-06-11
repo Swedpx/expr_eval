@@ -65,13 +65,13 @@ int expr_eval(char *str){
                         if ( (stack[stack_len-3] == '+') || (stack[stack_len-3] == '-') ){
                           final = (int *) realloc(final, sizeof(int)*(++final_len));
                           final[final_index++] = stack[stack_len-3];
-                          stack = (char *) realloc(stack, sizeof(char)*(--stack_len));
-                          stack[stack_len-2] = *str;
+                          stack = (char *) realloc(stack, sizeof(char)*(stack_len-1));
+                          stack[stack_len-3] = *str;
                           stack_index--;
                         }
                         else{
-                            stack = (char *) realloc(stack, sizeof(char)*(--stack_len));
-                            stack[stack_len-1] = *str;
+                            stack = (char *) realloc(stack, sizeof(char)*(stack_len-1));
+                            stack[stack_len-2] = *str;
                         }
                     }
                     else
@@ -91,13 +91,13 @@ int expr_eval(char *str){
                         if ( (stack[stack_len-3] == '*') || (stack[stack_len-3] == '/') || (stack[stack_len-3] == '%') ){
                           final = (int *) realloc(final, sizeof(int)*(++final_len));
                           final[final_index++] = stack[stack_len-3];
-                          stack = (char *) realloc(stack, sizeof(char)*(--stack_len));
-                          stack[stack_len-2] = *str;
+                          stack = (char *) realloc(stack, sizeof(char)*(stack_len-1));
+                          stack[stack_len-3] = *str;
                           stack_index--;
                         }
                         else{
-                            stack = (char *) realloc(stack, sizeof(char)*(--stack_len));
-                            stack[stack_len-1] = *str;
+                            stack = (char *) realloc(stack, sizeof(char)*(stack_len-1));
+                            stack[stack_len-2] = *str;
                         }
                     }
                     else
