@@ -57,21 +57,21 @@ int expr_eval(char *str){
                 continue;
             }
             if ((*str == '+') || (*str == '-')){
-                if ((stack[stack_len-2] == '+') || (stack[stack_len-2] == '-') || (stack[stack_len-2] == '*') || (stack[stack_len-2] == '/') || (stack[stack_len-2] == '%')){
+                if ((stack[stack_index-1] == '+') || (stack[stack_index-1] == '-') || (stack[stack_index-1] == '*') || (stack[stack_index-1] == '/') || (stack[stack_index-1] == '%')){
                     final = (int *) realloc(final, sizeof(int)*(++final_len));
-                    final[final_index++] = stack[stack_len-2];
-                    stack[stack_len-2] = '\0';
+                    final[final_index++] = stack[stack_index-1];
+                    stack[stack_index-1] = '\0';
                     if (stack_len != 2){
-                        if ( (stack[stack_len-3] == '+') || (stack[stack_len-3] == '-') ){
+                        if ( (stack[stack_index-2] == '+') || (stack[stack_index-2] == '-') ){
                           final = (int *) realloc(final, sizeof(int)*(++final_len));
-                          final[final_index++] = stack[stack_len-3];
+                          final[final_index++] = stack[stack_index-2];
                           stack = (char *) realloc(stack, sizeof(char)*(stack_len-1));
-                          stack[stack_len-3] = *str;
+                          stack[stack_index-2] = *str;
                           stack_index--;
                         }
                         else{
                             stack = (char *) realloc(stack, sizeof(char)*(stack_len-1));
-                            stack[stack_len-2] = *str;
+                            stack[stack_index-1] = *str;
                         }
                     }
                     else
@@ -83,21 +83,21 @@ int expr_eval(char *str){
                 stack[stack_index++] = *str;
             }
             if ((*str == '*') || (*str == '/') || (*str == '%')){
-                if ((stack[stack_len-2] == '*') || (stack[stack_len-2] == '/') || (stack[stack_len-2] == '%')){
+                if ((stack[stack_index-1] == '*') || (stack[stack_index-1] == '/') || (stack[stack_index-1] == '%')){
                     final = (int *) realloc(final, sizeof(int)*(++final_len));
-                    final[final_index++] = stack[stack_len-2];
-                    stack[stack_len-2] = '\0';
+                    final[final_index++] = stack[stack_index-1];
+                    stack[stack_index-1] = '\0';
                     if (stack_len != 2){
-                        if ( (stack[stack_len-3] == '*') || (stack[stack_len-3] == '/') || (stack[stack_len-3] == '%') ){
+                        if ( (stack[stack_index-2] == '*') || (stack[stack_index-2] == '/') || (stack[stack_index-2] == '%') ){
                           final = (int *) realloc(final, sizeof(int)*(++final_len));
-                          final[final_index++] = stack[stack_len-3];
+                          final[final_index++] = stack[stack_index-2];
                           stack = (char *) realloc(stack, sizeof(char)*(stack_len-1));
-                          stack[stack_len-3] = *str;
+                          stack[stack_index-2] = *str;
                           stack_index--;
                         }
                         else{
                             stack = (char *) realloc(stack, sizeof(char)*(stack_len-1));
-                            stack[stack_len-2] = *str;
+                            stack[stack_index-1] = *str;
                         }
                     }
                     else
@@ -133,12 +133,14 @@ int expr_eval(char *str){
     stack_len--;
     while(stack_len){
         chr_temp = stack+stack_len-1;
-        if (*chr_temp != ' '){
+        if (*chr_temp != '\0'){
             final = (int *) realloc(final, sizeof(int)*(++final_len));
             final[final_index++] = *chr_temp;
             chr_temp--;
             stack = (char*) realloc(stack, sizeof(char)*(--stack_len));
         }
+        else
+          stack_len--;
     }
     free(stack);
     final[final_index] = '\0';
