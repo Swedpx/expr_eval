@@ -1,7 +1,7 @@
 # expr_eval()
 This is a function that takes a mathematical expression in string form as parameter, and returns its value by using Shunting-Yard algorithm.
 
-Expression may contain the following:
+Expression may contain only the following:
 
     Unnecessary pair of parantheses or spaces,
     '+', '-' , '*', '/', '%' operators,
