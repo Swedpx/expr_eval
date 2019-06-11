@@ -9,7 +9,7 @@ Expression may contain only the following:
  
 sample I/O:
 
-    expr_eval("2 - 5") return -3
+    expr_eval("2 - 5") returns -3
     
     expr_eval("2   *  3 - ((5))") returns 1.
 
