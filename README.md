@@ -1,5 +1,5 @@
 # expr_eval()
-This is a function that takes a mathematical expression in string form, and returns its value by using Shunting-Yard algorithm.
+This is a function that takes a mathematical expression in string form as parameter, and returns its value by using Shunting-Yard algorithm.
 
 Expression may contain the following:
 
